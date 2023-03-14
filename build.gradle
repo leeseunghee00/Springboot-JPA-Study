@@ -1,0 +1,53 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.4'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'jpabook'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// lombok plugin
+	implementation('org.projectlombok:lombok')
+	annotationProcessor('org.projectlombok:lombok')
+
+	// test 환경
+	testImplementation('org.projectlombok:lombok')
+	testAnnotationProcessor('org.projectlombok:lombok')
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// reloading을 자동으로 해줌
+	implementation 'org.springframework.boot:spring-boot-devtools'
+
+	// h2 설정
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	runtimeOnly 'com.h2database:h2'
+
+	// @RunWith 실행 해결
+	testImplementation('org.junit.vintage:junit-vintage-engine') {
+		exclude group: 'org.hamcrest', module: 'hamcrest-core'
+	}
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
