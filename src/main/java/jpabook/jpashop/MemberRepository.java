@@ -1,16 +1,18 @@
-package springboot.jpa.study;
+package jpabook.jpashop;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @Repository
-public class MemberRepository {
+@RequiredArgsConstructor
+public class MemberRepository  {
 
     @PersistenceContext
-    private EntityManager em;
+    EntityManager em;
 
-    // 저장
     public Long save(Member member) {
         em.persist(member);
         return member.getId();
