@@ -19,5 +19,6 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-//    public List<Order> findAll(OrderedSearch orderedSearch) {}
+//    public List<Order> findAllByCriteria(OrderSearch orderedSearch) {
+//    }
 }
