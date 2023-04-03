@@ -20,6 +20,15 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    /* 필요한 */
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+    }
+
     /**
      * 조회
      */
