@@ -50,6 +50,8 @@ public class MemberApiController {
             @RequestBody @Valid UpdateMemberRequest request) {
 
         memberService.update(id, request.getName());
+        Member findMember = memberService.findOne(id);
+        return new UpdateMemberResponse(findMember.getId(), findMember.getName());
     }
 
     @Data
@@ -79,5 +81,4 @@ public class MemberApiController {
             this.id = id;
         }
     }
-
 }
