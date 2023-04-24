@@ -16,6 +16,7 @@ public class Member {
     @Column(name = "member_id") //PK 정의 - @Column(name = PK)
     private Long id;
 
+    //    @NotEmpty   //null값 허용 X -> api에 따라서 엔티티 설정이 다를 수 있기 때문에 이러한 설정은 dto에서 별도로 설정해 주는 것이 좋다.
     private String name;
 
     @Embedded   //내장타입을 포함했다는 것을 말함
