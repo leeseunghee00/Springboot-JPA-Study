@@ -22,6 +22,7 @@ public class Member {
     @Embedded   //내장타입을 포함했다는 것을 말함
     private Address address;
 
+    //    @JsonIgnore //주문 정보가 빠진다. 즉, api가 순수하게 회원 정보만 뿌린다. => 화면을 뿌리는 로직이 추가된 것이다 => dto에서 설정하기 !
     @OneToMany(mappedBy = "member")  //일대다 관계, mappedBy는 Order 테이블에 있는 member에 매핑된 것을 의미한다.(즉, 주인이 아니라는 뜻 )
     private List<Order> orders = new ArrayList<>();
 }
