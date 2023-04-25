@@ -36,6 +36,7 @@ public class OrderRepository {
             }
             jpql += " o.status = :status";
         }
+
         //회원 이름 검색
         if (StringUtils.hasText(orderSearch.getMemberName())) {
             if (isFirstCondition) {
@@ -55,5 +56,15 @@ public class OrderRepository {
             query = query.setParameter("name", orderSearch.getMemberName());
         }
         return query.getResultList();
+    }
+
+    // 엔티티 DTO fetch join 사용
+    public List<Order> findAllWithMemberDelivery() {
+        //sql 입장에선 member 와 delivery 를 join 하면서 + select 입장에선 다 한방에 가져온다.
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class
+        ).getResultList();
     }
 }
