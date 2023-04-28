@@ -1,5 +1,7 @@
 package jpabook.jpashop.repository;
 
+//import jpabook.jpashop.api.OrderSimpleApiController; -> repository 에서 controller 와 의존관계 생기면 큰일남
+
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
