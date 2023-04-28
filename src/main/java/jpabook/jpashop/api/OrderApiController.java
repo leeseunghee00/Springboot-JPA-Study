@@ -45,7 +45,7 @@ public class OrderApiController {
     public List<OrderDto> ordersV2() {
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
         List<OrderDto> result = orders.stream()
-                .map(o -> new OrderDto(o))
+                .map(OrderDto::new)
                 .collect(Collectors.toList());
 
         return result;
@@ -67,9 +67,27 @@ public class OrderApiController {
             orderStatus = order.getStatus();
             address = order.getMember().getAddress();
             orderItems = order.getOrderItems().stream()
-                    .map(orderItem -> new OrderItemDto(orderItem))
+                    .map(OrderItemDto::new)
                     .collect(Collectors.toList());
         }
+    }
+
+    /**
+     * 주문 조회 V3. 엔티티를 DTO로 변환 - fetch join 최적화
+     */
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithItem();
+
+        for (Order order : orders) {
+            System.out.println("order ref = " + order + " id = " + order.getId());
+            System.out.println("order = " + order.getId());
+        }
+        List<OrderDto> result = orders.stream()
+                .map(OrderDto::new)
+                .collect(Collectors.toList());
+
+        return result;
     }
 
     @Getter
