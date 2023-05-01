@@ -120,6 +120,13 @@ public class OrderApiController {
         return orderQueryRepository.findOrderQueryDtos();
     }
 
+    /**
+     * 주문 조회 V5. V4에서 컬렉션 조회 최적화
+     */
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> ordersV5() {
+        return orderQueryRepository.findAllByDto_optimization();
+    }
 
     @Getter
     static class OrderItemDto {
@@ -134,5 +141,4 @@ public class OrderApiController {
             count = orderItem.getCount();
         }
     }
-
 }
